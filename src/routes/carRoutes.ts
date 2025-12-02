@@ -6,5 +6,5 @@ router.get('/', getRecords);
 router.get('/:id', getRecord);
 router.post ('/', createRecord);
 router.put ('/:id', updateRecord);
-
+router.delete ('/:id', deleteRecord);
 export const carRoutes = router;
