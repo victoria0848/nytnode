@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
-import prisma from "../prisma";
+import { prisma } from "../prisma";
 
+/**
+ * Method Get Records
+ * @param req 
+ * @param res 
+ * @returns Array
+ */
 export const getRecords = async (req: Request, res: Response) => {
   try {
     const data = await prisma.car.findMany({
@@ -47,7 +53,7 @@ export const getRecord = async (req: Request, res: Response) => {
  * Method Update Record
  * @param req 
  * @param res 
- * @returns 
+ * @returns Object
  */
 export const updateRecord = async (req: Request, res: Response) => {
 return 
@@ -77,7 +83,50 @@ return
 }
 }
 
-export const deleteRecord = async {req: Request, res: Response} => {
+/**
+ * Method Update Record
+ * @param req 
+ * @param res 
+ * @returns Object
+ */
+export const updateRecord = async (req: Request, res: Response) => {
+    const id = Number (req.params.id);
+
+    if(!id) {
+        return res.status(404).json({ error: 'ID is missing'})
+    }
+}
+
+    const { category, brand, model, year, price, fueltype } = req.body;
+
+    if(!category || !brand || !model || !year || !role || !fueltype) {
+        return res.status(404).json({ error: 'All data is required'})
+}
+    try {
+        const data = await prisma.car.update({
+            where: { id },
+            data: {  
+                category,
+                brand,
+                model, 
+                year: Number(year),
+                price,
+                fueltype
+            }
+     })
+        return res.status(201).json(data);
+}    catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Something went wrong'});
+}
+
+/**
+ * Method Delete Record
+ * @param req 
+ * @param res 
+ * @returns Object
+ */
+export const deleteRecord = async (req: Request, res: Response) => {
    const id = Number(req.params.id) 
 
    if(!id) {
@@ -89,7 +138,7 @@ export const deleteRecord = async {req: Request, res: Response} => {
         where: { id: id }
      });
      return res.status(200).json({ 
-        message: 'Record deleted'
+        message: 'Record deleted',
         deleteId: id
      })
    } catch (error) {

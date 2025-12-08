@@ -1,0 +1,33 @@
+export const fieldTypes: Record<string, Record<string, 'string' | 'number' | 'boolean' | 'date'>> = {
+    user: {
+        id: 'number',
+        firstname: 'string',
+        lastname: 'string',
+        email: 'string',
+        password: 'string',
+        role: 'string',
+        isActive: 'boolean'
+    },
+    category: {
+        id: 'number',
+        name: 'string'
+    },
+    brand: {
+        id: 'number',
+        name: 'string'
+    },
+    fueltype: {
+        id: 'number',
+        name: 'string'
+    },
+    car: {
+        id: 'number',
+        categoryId: 'number',
+        brandId: 'number',
+        model: 'string',
+        year: 'number',
+        price: 'number',
+        fueltypeId: 'number'
+    }
+    // Her kommer næste model
+};
